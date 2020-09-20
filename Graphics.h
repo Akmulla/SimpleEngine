@@ -3,8 +3,8 @@
 
 class Graphics
 {
-public :
-	Graphics(HWND hWnd);
+public:
+	void InitWindow(HWND& hWnd, HINSTANCE hInstance, WNDPROC WndProc);
 private:
 	ID3D11Device* pDevice = nullptr;
 	IDXGISwapChain* pSwap = nullptr;
