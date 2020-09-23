@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="Keyboard.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

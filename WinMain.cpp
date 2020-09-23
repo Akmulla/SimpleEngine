@@ -1,7 +1,7 @@
 #include <Windows.h>
 #include <string>
 #include <sstream>
-#include "Graphics.h"
+#include "Window.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -44,8 +44,7 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow)
 {
 	HWND hWnd;
-	Graphics graphics;
-	graphics.InitWindow(hWnd, hInstance, WndProc);
+	Window window(hInstance);
 
 	MSG msg;
 	BOOL gResult;

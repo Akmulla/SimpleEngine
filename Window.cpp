@@ -1,6 +1,6 @@
-#include "Graphics.h"
+#include "Window.h"
 
-void Graphics::InitWindow(HWND& hWnd, HINSTANCE hInstance, WNDPROC WndProc)
+Window::Window(HINSTANCE hInstance) : keyboard()
 {
 	const auto winClassName = "SimpleExampleWindowClass";
 
@@ -35,4 +35,10 @@ void Graphics::InitWindow(HWND& hWnd, HINSTANCE hInstance, WNDPROC WndProc)
 	);
 
 	ShowWindow(hwnd, SW_SHOW);
+}
+
+LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+
+	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
