@@ -5,11 +5,13 @@
 
 class Keyboard
 {
-	friend class Window;
 public:
 	bool ReadKeyPressed(unsigned char keycode);
 	void SetKeyPressState(unsigned char keycode);
 
+	static constexpr unsigned int nKeys = 256u;
+	std::bitset<nKeys> keystates;
 private:
-	std::bitset<256> keystates;
+	
+	
 };

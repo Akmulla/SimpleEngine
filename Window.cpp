@@ -1,9 +1,9 @@
 #include "Window.h"
 
-Window::Window(HINSTANCE hInstance) : keyboard()
+Window::Window(HINSTANCE hInstance) 
 {
 	const auto winClassName = "SimpleExampleWindowClass";
-
+	keyboard.keystates.set();
 	WNDCLASSEX wc = { };
 	wc.cbSize = sizeof(wc);
 	wc.style = CS_OWNDC;
@@ -19,7 +19,7 @@ Window::Window(HINSTANCE hInstance) : keyboard()
 	wc.hIconSm = nullptr;
 	RegisterClassEx(&wc);
 
-	HWND hwnd = CreateWindowEx(
+	hWnd = CreateWindowEx(
 		0,
 		winClassName,
 		"MyWindow",
@@ -34,11 +34,24 @@ Window::Window(HINSTANCE hInstance) : keyboard()
 		nullptr
 	);
 
-	ShowWindow(hwnd, SW_SHOW);
+	ShowWindow(hWnd, SW_SHOW);
 }
 
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	// forward message to window instance handler
+	return pWnd->HandleMessage(hWnd, msg, wParam, lParam);
+}
+
+LRESULT CALLBACK Window::HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+		case WM_KEYDOWN:
+			keyboard.SetKeyPressState(static_cast<unsigned char>(wParam));
+			break;
+	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }

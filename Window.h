@@ -13,4 +13,5 @@ private:
 	Keyboard keyboard;
 	HWND hWnd;
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	LRESULT CALLBACK HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 };
