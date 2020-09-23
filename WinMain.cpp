@@ -53,6 +53,9 @@ int CALLBACK WinMain(
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
+
+		
+
 	}
 
 	if (gResult == -1)
