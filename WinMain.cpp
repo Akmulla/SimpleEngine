@@ -14,8 +14,7 @@ int CALLBACK WinMain(
 	Time time;
 
 	MSG msg;
-	BOOL gResult;
-	//while ( (gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+
 	while (true)
 	{
 		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -27,8 +26,6 @@ int CALLBACK WinMain(
 
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
-
-			
 		}
 		time.Tick();
 		double dt = time.GetDt();
@@ -36,13 +33,4 @@ int CALLBACK WinMain(
 		oss << "(" << dt << ")";
 		SetWindowText(window.hWnd, oss.str().c_str());
 	}
-
-	//if (gResult == -1)
-	//{
-	//	return -1;
-	//}
-	//else
-	//{
-	//	return msg.wParam;
-	//}
 }
