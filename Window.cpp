@@ -40,8 +40,6 @@ Window::Window(HINSTANCE hInstance)
 	ShowWindow(hWnd, SW_SHOW);
 }
 
-
-
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	//Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
@@ -56,6 +54,9 @@ LRESULT CALLBACK Window::HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARA
 	{
 		case WM_KEYDOWN:
 			keyboard.SetKeyPressState(static_cast<unsigned char>(wParam));
+			/*std::ostringstream oss;
+			oss << "(" << wParam << ")";
+			SetWindowText(hWnd, oss.str().c_str());*/
 			break;
 	}
 

@@ -1,6 +1,8 @@
 #pragma once
 #include <d3d11.h>
 #include "Keyboard.h"
+#include <string>
+#include <sstream>
 
 class Window
 {
