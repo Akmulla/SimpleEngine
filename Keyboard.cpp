@@ -7,5 +7,5 @@ bool Keyboard::ReadKeyPressed(unsigned char keycode)
 
 void Keyboard::SetKeyPressState(unsigned char keycode)
 {
-	keystates.set(keycode);
+	keystates[keycode] = true;
 }
