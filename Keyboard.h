@@ -11,7 +11,4 @@ public:
 
 	static constexpr unsigned int nKeys = 256u;
 	std::bitset<nKeys> keystates;
-private:
-	
-	
 };
