@@ -6,6 +6,7 @@ class Window
 {
 public:
 	Window(HINSTANCE hInstance);
+	static Window* instance;
 private:
 	ID3D11Device* pDevice = nullptr;
 	IDXGISwapChain* pSwap = nullptr;

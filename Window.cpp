@@ -1,5 +1,7 @@
 #include "Window.h"
 
+Window* Window::instance = nullptr;
+
 Window::Window(HINSTANCE hInstance) 
 {
 	const auto winClassName = "SimpleExampleWindowClass";
@@ -34,14 +36,18 @@ Window::Window(HINSTANCE hInstance)
 		nullptr
 	);
 
+	instance = this;
 	ShowWindow(hWnd, SW_SHOW);
 }
 
+
+
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+	//Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
 	// forward message to window instance handler
-	return pWnd->HandleMessage(hWnd, msg, wParam, lParam);
+	//return pWnd->HandleMessage(hWnd, msg, wParam, lParam);
+	return instance->HandleMessage(hWnd, msg, wParam, lParam);
 }
 
 LRESULT CALLBACK Window::HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
