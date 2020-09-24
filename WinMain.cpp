@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include "Window.h"
+#include "Time.h"
 
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
@@ -10,21 +11,38 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow)
 {
 	Window window(hInstance);
+	Time time;
 
 	MSG msg;
 	BOOL gResult;
-	while ( (gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+	//while ( (gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+	while (true)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				return msg.wParam;
+			}
+
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+
+			
+		}
+		time.Tick();
+		double dt = time.GetDt();
+		std::ostringstream oss;
+		oss << "(" << dt << ")";
+		SetWindowText(window.hWnd, oss.str().c_str());
 	}
 
-	if (gResult == -1)
-	{
-		return -1;
-	}
-	else
-	{
-		return msg.wParam;
-	}
+	//if (gResult == -1)
+	//{
+	//	return -1;
+	//}
+	//else
+	//{
+	//	return msg.wParam;
+	//}
 }

@@ -9,12 +9,12 @@ class Window
 public:
 	Window(HINSTANCE hInstance);
 	static Window* instance;
+	HWND hWnd;
 private:
 	ID3D11Device* pDevice = nullptr;
 	IDXGISwapChain* pSwap = nullptr;
 	ID3D11DeviceContext* pContext = nullptr;
 	Keyboard keyboard;
-	HWND hWnd;
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	LRESULT CALLBACK HandleMessage(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 };
