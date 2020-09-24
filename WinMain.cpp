@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include "Window.h"
+#include "Time.h"
 
 int CALLBACK WinMain(
 	_In_ HINSTANCE hInstance,
@@ -10,6 +11,7 @@ int CALLBACK WinMain(
 	_In_ int nCmdShow)
 {
 	Window window(hInstance);
+	Time time;
 
 	MSG msg;
 	BOOL gResult;
@@ -17,6 +19,12 @@ int CALLBACK WinMain(
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
+
+		time.Tick();
+		double dt = time.GetDt();
+		std::ostringstream oss;
+		oss << "(" << dt << ")";
+		SetWindowText(window.hWnd, oss.str().c_str());
 	}
 
 	if (gResult == -1)

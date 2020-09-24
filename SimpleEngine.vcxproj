@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="Keyboard.h" />
   </ItemGroup>
