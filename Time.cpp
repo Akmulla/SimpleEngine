@@ -4,10 +4,6 @@ Time::Time()
 {
     lastTick = std::chrono::steady_clock::now();
     dt = 0.0;
-    
-
-    //std::cout << "\nIt took me " << time_span.count() << " seconds." <<std::flush;
-
 }
 
 void Time::Tick()
