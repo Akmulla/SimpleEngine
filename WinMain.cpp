@@ -29,6 +29,7 @@ int CALLBACK WinMain(
 		}
 		time.Tick();
 		double dt = time.GetDt();
+		window.DrawGraphics();
 		//std::ostringstream oss;
 		//oss << "(" << dt << ")";
 		//SetWindowText(window.hWnd, oss.str().c_str());

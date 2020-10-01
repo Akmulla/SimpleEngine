@@ -35,9 +35,16 @@ Window::Window(HINSTANCE hInstance)
 		hInstance,
 		nullptr
 	);
-
+	//Graphics g(hWnd);
+	gfx = new Graphics(hWnd);
 	instance = this;
 	ShowWindow(hWnd, SW_SHOW);
+}
+
+void Window::DrawGraphics()
+{
+	gfx->ClearBuffer(255,0,0);
+	gfx->EndFrame();
 }
 
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
