@@ -3,6 +3,7 @@
 Time::Time()
 {
     lastTick = std::chrono::steady_clock::now();
+    firstTick = std::chrono::steady_clock::now();
     dt = 0.0;
 }
 
@@ -17,4 +18,9 @@ void Time::Tick()
 double Time::GetDt()
 {
     return dt;
+}
+
+double Time::GetTime()
+{
+    return std::chrono::duration_cast<std::chrono::duration<double>>(lastTick - firstTick).count();
 }

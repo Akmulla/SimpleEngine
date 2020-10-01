@@ -14,7 +14,7 @@ int CALLBACK WinMain(
 	Time time;
 
 	MSG msg;
-
+	HWND hWnd = window.hWnd;
 	while (true)
 	{
 		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -29,8 +29,11 @@ int CALLBACK WinMain(
 		}
 		time.Tick();
 		double dt = time.GetDt();
-		std::ostringstream oss;
-		oss << "(" << dt << ")";
-		SetWindowText(window.hWnd, oss.str().c_str());
+		window.ClearBuffer(sin(time.GetTime()), 0, 0);
+		window.gfx->DrawTriangle();
+		window.EndFrame();
+		//std::ostringstream oss;
+		//oss << "(" << dt << ")";
+		//SetWindowText(window.hWnd, oss.str().c_str());
 	}
 }

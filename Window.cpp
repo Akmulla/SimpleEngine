@@ -35,9 +35,20 @@ Window::Window(HINSTANCE hInstance)
 		hInstance,
 		nullptr
 	);
-
+	//Graphics g(hWnd);
+	gfx = new Graphics(hWnd);
 	instance = this;
 	ShowWindow(hWnd, SW_SHOW);
+}
+
+void Window::EndFrame()
+{
+	gfx->EndFrame();
+}
+
+void Window::ClearBuffer(float r, float g, float b)
+{
+	gfx->ClearBuffer(r, g, b);
 }
 
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

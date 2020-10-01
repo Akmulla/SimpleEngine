@@ -3,6 +3,7 @@
 #include "Keyboard.h"
 #include <string>
 #include <sstream>
+#include "Graphics.h"
 
 class Window
 {
@@ -10,6 +11,9 @@ public:
 	Window(HINSTANCE hInstance);
 	static Window* instance;
 	HWND hWnd;
+	Graphics* gfx;
+	void EndFrame();
+	void ClearBuffer(float r, float g, float b);
 private:
 	ID3D11Device* pDevice = nullptr;
 	IDXGISwapChain* pSwap = nullptr;
