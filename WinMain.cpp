@@ -29,7 +29,8 @@ int CALLBACK WinMain(
 		}
 		time.Tick();
 		double dt = time.GetDt();
-		window.DrawGraphics();
+		window.ClearBuffer(sin(time.GetTime()), 0, 0);
+		window.EndFrame();
 		//std::ostringstream oss;
 		//oss << "(" << dt << ")";
 		//SetWindowText(window.hWnd, oss.str().c_str());

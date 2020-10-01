@@ -41,10 +41,14 @@ Window::Window(HINSTANCE hInstance)
 	ShowWindow(hWnd, SW_SHOW);
 }
 
-void Window::DrawGraphics()
+void Window::EndFrame()
 {
-	gfx->ClearBuffer(255,0,0);
 	gfx->EndFrame();
+}
+
+void Window::ClearBuffer(float r, float g, float b)
+{
+	gfx->ClearBuffer(r, g, b);
 }
 
 LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

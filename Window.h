@@ -12,7 +12,8 @@ public:
 	static Window* instance;
 	HWND hWnd;
 	Graphics* gfx;
-	void DrawGraphics();
+	void EndFrame();
+	void ClearBuffer(float r, float g, float b);
 private:
 	ID3D11Device* pDevice = nullptr;
 	IDXGISwapChain* pSwap = nullptr;
