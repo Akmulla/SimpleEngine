@@ -30,6 +30,7 @@ int CALLBACK WinMain(
 		time.Tick();
 		double dt = time.GetDt();
 		window.ClearBuffer(sin(time.GetTime()), 0, 0);
+		window.gfx->DrawTriangle();
 		window.EndFrame();
 		//std::ostringstream oss;
 		//oss << "(" << dt << ")";

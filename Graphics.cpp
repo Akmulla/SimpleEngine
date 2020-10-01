@@ -1,5 +1,10 @@
 #include "Graphics.h"
+#include <wrl.h>
+#include <d3dcompiler.h>
+#include <array>
+
 #pragma comment(lib, "d3d11.lib")
+#pragma comment(lib,"D3DCompiler.lib")
 
 Graphics::Graphics(HWND hWnd)
 {
@@ -50,4 +55,56 @@ void Graphics::ClearBuffer(float red, float green, float blue)
 {
 	const float color[] = { red,green,blue,1.0f };
 	pContext->ClearRenderTargetView(pTarget, color);
+}
+
+void Graphics::DrawTriangle()
+{
+	using namespace Microsoft::WRL;
+
+	struct Vertex
+	{
+		float x;
+		float y;
+	};
+
+	const Vertex vertices[] =
+	{
+		{0.0f,0.5f},
+		{0.5f,-0.5f},
+		{-0.5f,-0.5f}
+	};
+
+	ComPtr<ID3D11Buffer> pVertexBuffer;
+	D3D11_BUFFER_DESC bd = {};
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.CPUAccessFlags = 0u;
+	bd.MiscFlags = 0u;
+	bd.ByteWidth = sizeof(vertices);
+	bd.StructureByteStride = sizeof(Vertex);
+	D3D11_SUBRESOURCE_DATA sd = {};
+	sd.pSysMem = vertices;
+	pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer);
+
+	const UINT stride = sizeof(Vertex);
+	const UINT offset = 0u;
+	pContext->IASetVertexBuffers(0u, 1u, &pVertexBuffer, &stride, &offset);
+
+	//Vertex shader
+	ComPtr<ID3D11VertexShader> pVertexShader;
+	ComPtr<ID3DBlob> pBlob;
+	D3DReadFileToBlob(L"VertexShader.cso", &pBlob);
+	pDevice->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pVertexShader);
+
+	pContext->VSSetShader(pVertexShader.Get(), 0, 0);
+
+	//PixelShader
+	ComPtr<ID3D11PixelShader> pPixelShader;
+	D3DReadFileToBlob(L"PixelShader.cso", &pBlob);
+	pDevice->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pPixelShader);
+
+	pContext->PSSetShader(pPixelShader.Get(), nullptr, 0u);
+	pContext->OMSetRenderTargets(1u, &pTarget, nullptr);
+
+	pContext->Draw(std::size(vertices), 0u);
 }
